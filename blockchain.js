@@ -51,7 +51,19 @@ class Block {
   }
 
   mineBlock(difficulty) {
+    console.log("default hash: ", this.hash)
     while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
+      /**
+       * 找到 diffuculty 規定的 0 才 停止 loop
+       * difficulty = 4
+       * this.hash = 07b125de1398e0393c1fc96370f2d559ea650ffb179a1de704bf7e76e672a03f
+       * this.hash.substring(0, 4) = 07b1
+       * while(07b1 !== 0000) {
+       *  找到後 他會 overwrite 掉之前 initial的 hash
+       * }
+       *
+       * Note: SHA256密碼學 fn generate 到 越多0 在前面 越慢
+       */
       this.nonce++;
       this.hash = this.calculateHash();
     }
@@ -72,7 +84,7 @@ class Block {
 class BlockChain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
-    this.difficulty = 2;
+    this.difficulty = 4;
     this.pendingTransactions = [];
     this.miningReward = 100;
   }
