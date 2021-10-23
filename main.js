@@ -3,13 +3,13 @@ const EC = require("elliptic").ec;
 const ec = new EC("secp256k1");
 
 const myKey = ec.keyFromPrivate(
-  "c8389a01dd10d46f46a2180472327af15f82121446d45ac987246ea9f7923626"
+  "bd12c017a9e610d936b2a6a6df1de0b8693e66ab515b153a82966c60a55c29be"
 );
 const myWalletAddress = myKey.getPublic('hex');
 
 let yzCoin = new BlockChain();
 
-const tx1 = new Transaction(myWalletAddress, 'public key goes here.', 10)
+const tx1 = new Transaction(myWalletAddress, 'other public key goes here from the people address.', 10)
 tx1.signTransaction(myKey);
 yzCoin.addTransaction(tx1)
 
